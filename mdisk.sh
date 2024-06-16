@@ -18,5 +18,5 @@ else
 fi
 
 sudo mkdir $mount_path
-mount $path $mount_path
+sudo mount $path $mount_path
 echo "Mounted to $mount_path"
