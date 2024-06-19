@@ -1,7 +1,4 @@
-disk_path=$1
-optional_mount_name=$2
-
-if [[ ! "$disk_path" ]]; then
+if [[ ! "$1" ]]; then
   echo
   echo "!! ERROR: No mountable path specified !!"
   echo "!! Exiting !!"
@@ -9,7 +6,10 @@ if [[ ! "$disk_path" ]]; then
   exit 1
 fi
 
-if [[ -d "$disk_path" ]]; then
+disk_path=$1
+optional_mount_name=$2
+
+if [[ ! -b "$disk_path" ]]; then
   echo
   echo "!! ERROR: Specified disk path is not mountable !!"
   echo "!! Exiting !!"
