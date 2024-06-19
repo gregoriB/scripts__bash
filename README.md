@@ -9,3 +9,9 @@ bash mdisk.sh <path to disk> [name of mounted directory]
 ```
 
 If no new directory name is specified, then the existing disk name will be used.
+
+### Example
+
+```sh
+bash mdisk.sh /dev/sda1 sandisk_ssd # mount disk at /dev/sda1 to /mnt/sandisk_ssd
+```
