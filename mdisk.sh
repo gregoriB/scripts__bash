@@ -1,35 +1,48 @@
-path=$1
-optional_name=$2
+disk_path=$1
+optional_mount_name=$2
 
-if [[ ! "$path" ]]; then
+if [[ ! "$disk_path" ]]; then
   echo
-  echo "!!!!!!!!!!!!!!!!"
-  echo "No mountable path specified"
-  echo "Exiting"
+  echo "!! ERROR: No mountable path specified !!"
+  echo "!! Exiting !!"
+  echo
   exit 1
 fi
 
-echo_arg "Mounting $path"
-prepared="${path%/}" # remove trailing slash
-last="${prepared##*/}"
+if [[ -d "$disk_path" ]]; then
+  sudo rm -rf $mount_path
+  echo "Existing directory $mount_path removed"
+fi
 
-if [[ ! "$optional_name" ]]; then
-  mount_path="/mnt/$last"
+echo "Mounting $disk_path"
+
+if [[ "$optional_mount_name" ]]; then
+  mount_path="/mnt/$optional_mount_name"
 else
-  mount_path="/mnt/$optional_name"
+  deslashed="${disk_path%/}" # remove trailing slash
+  disk_name="${deslashed##*/}" # get disk name from end of disk path
+  mount_path="/mnt/$disk_name"
 fi
 
 if [[ -d "$mount_path" ]]; then
-  sudo rm -rf $mount_path
-  echo "Existing directory $mount_path removed"
+  if [[ -z "$(ls -A $mount_path)" ]]; then
+    sudo rm -r $mount_path
+    echo "Existing empty directory at $mount_path removed"
+  else
+    echo
+    echo "!! ERROR: $mount_path is not empty !!"
+    echo "!! Exiting !!"
+    echo
+    exit 1
+  fi
 fi
 
 sudo mkdir $mount_path
 echo "$mount_path directory created"
 
-sudo mount $path $mount_path
+sudo mount $disk_path $mount_path
 echo
-echo "$path mounted to $mount_path"
+echo "$disk_path mounted to $mount_path"
 
 echo
 echo "Sanity check for $mount_path: "
