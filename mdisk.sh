@@ -10,11 +10,12 @@ if [[ ! "$disk_path" ]]; then
 fi
 
 if [[ -d "$disk_path" ]]; then
-  sudo rm -rf $mount_path
-  echo "Existing directory $mount_path removed"
+  echo
+  echo "!! ERROR: Specified disk path is not mountable !!"
+  echo "!! Exiting !!"
+  echo
+  exit 1
 fi
-
-echo "Mounting $disk_path"
 
 if [[ "$optional_mount_name" ]]; then
   mount_path="/mnt/$optional_mount_name"
@@ -40,7 +41,9 @@ fi
 sudo mkdir $mount_path
 echo "$mount_path directory created"
 
+echo "Mounting $disk_path"
 sudo mount $disk_path $mount_path
+
 echo
 echo "$disk_path mounted to $mount_path"
 
