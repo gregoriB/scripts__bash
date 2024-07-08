@@ -1,6 +1,7 @@
 if [[ ! "$1" ]]; then
   echo
-  echo "!! ERROR: No mountable path specified !!"
+  echo "!! ERROR: Missing specified disk path !!"
+  echo "Usage: $ mdisk <path_to_disk> [mounted name]"
   echo "!! Exiting !!"
   echo
   exit 1
@@ -32,6 +33,7 @@ if [[ -d "$mount_path" ]]; then
   else
     echo
     echo "!! ERROR: $mount_path is not empty !!"
+    echo "Please remove this directory"
     echo "!! Exiting !!"
     echo
     exit 1
