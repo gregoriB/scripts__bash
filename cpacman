@@ -18,7 +18,7 @@ packages_dir="$HOME/.config/packages"
 sudo pacman $command $rest_args
 
 if [[ ! -d $packages_dir ]]; then
-  mkdir $HOME/.config/packages
+  mkdir $packages_dir
 fi
 
 sudo pacman -Qe > $packages_dir/user_installed.txt
