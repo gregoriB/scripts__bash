@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ ! "$1" || ! "$2" ]]; then
+  echo
+  echo "!! ERROR: Missing arguments!"
+  echo "Usage: $ watchf <files> <script>"
+  echo "Example: $ watchf \"./*.go\" debug_run.sh"
+  echo "Note that the quotes around the files is necessary when using \"*\""
+  echo "!! Exiting !!"
+  echo
+  exit 1
+fi
+
+files=$1
+script=$2
+
+echo "Watching $files files.  $script will be executed when files are changed"
+
+./$script
+
+while true; do
+    find $files -mmin -.0016 -exec ./$script \;
+done

@@ -40,3 +40,16 @@ $ ./cpacman -Syu
 ```
 
 After installation, a list of user installed packages will be saved to `$HOME/.config/packages.`
+
+
+## WATCHF
+
+### Watch specified files for changes and then run a specific script on change
+
+### Example
+
+```sh
+$ ./watchf "./*.go" debug_run
+```
+
+This command watching all `.go` files in the current directory, and then executes `debug_run` when any files are changed
