@@ -1,0 +1,18 @@
+#!/bin/bash
+
+selected_mode=$(echo -e "$modes" | rofi -dmenu -p "Select Mode:")
+
+case "$selected_mode" in
+    "run")
+        rofi -show run
+        ;;
+    "window switcher")
+        rofi -show window
+        ;;
+    "emoji Picker")
+        rofi -show emoji
+        ;;
+    *)
+        echo "Invalid selection"
+        ;;
+esac
