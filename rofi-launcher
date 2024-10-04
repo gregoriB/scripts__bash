@@ -1,15 +1,18 @@
 #!/bin/bash
 
-selected_mode=$(echo -e "$modes" | rofi -dmenu -p "Select Mode:")
+modes="Run\nWindow Switcher\nEmoji Picker"
 
+selected_mode=$(echo -e "$modes" | rofi -dmenu -i -p "Select Mode:")
+
+# Run the selected mode
 case "$selected_mode" in
-    "run")
+    "Run")
         rofi -show run
         ;;
-    "window switcher")
+    "Window Switcher")
         rofi -show window
         ;;
-    "emoji Picker")
+    "Emoji Picker")
         rofi -show emoji
         ;;
     *)
